@@ -1,0 +1,29 @@
+width, height = 280, 175
+
+distance = 48...
+xShift, yShift = 0., 0.
+
+mTarget: 0.26x
+mRecovery: 0.26x
+
+for i in range(NofP):
+    mRes[i,:] = cp.asarray([2*listX[i]*listY[i]*np.cos(listX[i]/4)/mPixelX/mPixelY,
+			4*listX[i]*listY[i]*np.cos(listX[i]/2)*np.sin(listX[i]/4)/mPixelX/mPixelY,
+			4*listX[i]*listX[i]*np.sin(listX[i]/4)*np.cos(listY[i]/4)/mPixelX/mPixelY])
+bExp = cp.tensordot(matrixA,mRes,axes=([2,4],[0,1]))
+
+repeat:
+	5000	2	2
+	1000	0	0
+	1000	2	2
+	2000	0	0
+
+result:		^2			abs
+	48.	3.6825694205117365	1.9829443124550845
+	36.	3.4439037072844267	1.9632036002694613
+	24.	2.0386367386976962	1.4672671666874082
+	18.	1.1400133142897695	1.0901742833658805
+	12.	0.6617111607743023	0.8004822457569101
+	9.	0.5264849704598222	0.7115649593951869
+	6.	0.5598899851499218	0.7523199303002616
+	4.	1.3941040096707653	1.1973982167497863

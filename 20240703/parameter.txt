@@ -1,3 +1,5 @@
+No blurring
+
 width, height = 280, 175
 
 distance = 48...

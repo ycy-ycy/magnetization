@@ -1,0 +1,32 @@
+No blurring
+
+width, height = 280, 175
+
+distance = 2.8
+xShift, yShift = 0., 0.
+
+for i in range(NofP):
+    dx = listX[i]-0.5*mPixelX
+    dy = listY[i]-0.5*mPixelY
+    r2 = dx*dx + dy*dy
+    r = np.sqrt(r2)
+    if r != 0:
+        mRes[i, :] = cp.asarray([
+            cp.float64(np.sin(np.pi * (r / 11.48)) * dx / r),
+            cp.float64(np.sin(np.pi * (r / 11.48)) * dy / r),
+            cp.float64(np.cos(np.pi * (r / 11.48)))
+        ])
+    else:
+        mRes[i, :] = cp.asarray([0, 0, 1])  # Handle the case when r is 0
+bExp = cp.tensordot(matrixA,mRes,axes=([2,4],[0,1]))
+
+alpha:	0.00329
+beta:	0.0217
+gamma:	0.00117
+
+repeat:
+	3000	9	11
+	2000	0	0
+	1000	7	9
+	1000	0	0
+	1000	5	7

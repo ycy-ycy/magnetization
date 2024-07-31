@@ -1,0 +1,22 @@
+No blurring
+
+width, height = 280, 175
+
+distance = 12.
+xShift, yShift = 16., -8.
+
+mTarget: 0.32x
+mRecovery: 0.32x
+
+for i in range(NofP):
+    mRes[i,:] = cp.asarray([0,
+			0,
+			300*((listX[i]-mPixelX/2-3)**2+(listY[i]-mPixelY/2+5)**2-20)/mPixelX/mPixelY])
+bExp = cp.tensordot(matrixA,mRes,axes=([2,4],[0,1]))
+
+repeat:
+	3000	9	11
+	2000	0	0
+	1000	7	9
+	1000	0	0
+	1000	5	7
